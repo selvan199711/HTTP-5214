@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>i have a secret – the useless web</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="comic_page">
+        <header class="comic_header">
+            <h1 class="comic_title">i have a secret</h1>
+            <p class="subtitle">the most useless website on earth</p>
+            <button id="sound_toggle" class="sound_btn" aria-label="Toggle sound">
+                <span id="sound_icon">🔊</span> sound
+            </button>
+        </header>
+
+        <main class="single_panel_container">
+            <div id="current_card" class="current_card_wrapper">
+                
+            </div>
+        </main>
+
+        <div class="controls_bottom">
+            <button id="next_btn" class="action_btn next_btn">
+                <span>next hero →</span>
+            </button>
+            <button id="reset_btn" class="action_btn reset_btn">
+                <span>↺ reset</span>
+            </button>
+        </div>
+
+        <div class="card_counter" id="card_counter">
+            <span id="current_num">1</span> / <span id="total_num">28</span>
+        </div>
+
+        <footer class="comic_footer">
+            <p>created by thamilchselvan kethareswaran | web development | just for fun</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
