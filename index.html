@@ -2,44 +2,27 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>i have a secret – the useless web</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perma Vibe Portal</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="comic_page">
-        <header class="comic_header">
-            <h1 class="comic_title">i have a secret</h1>
-            <p class="subtitle">the most useless website on earth</p>
-            <button id="sound_toggle" class="sound_btn" aria-label="Toggle sound">
-                <span id="sound_icon">🔊</span> sound
-            </button>
-        </header>
-
-        <main class="single_panel_container">
-            <div id="current_card" class="current_card_wrapper">
-                
-            </div>
-        </main>
-
-        <div class="controls_bottom">
-            <button id="next_btn" class="action_btn next_btn">
-                <span>next hero →</span>
-            </button>
-            <button id="reset_btn" class="action_btn reset_btn">
-                <span>↺ reset</span>
-            </button>
+    <div class="glow"></div>
+    <main>
+        <p class="microcopy">Welcome to the most useless vibe loop on the net.</p>
+        <h1>Perma Vibe Portal</h1>
+        <p class="instructions">Tap, click, or press any key to remix the aura.</p>
+        <div class="vibe-orb" role="button" aria-label="vibe orb">
+            <p id="mantra" aria-live="polite">The vibe is idling... prod it.</p>
         </div>
-
-        <div class="card_counter" id="card_counter">
-            <span id="current_num">1</span> / <span id="total_num">28</span>
-        </div>
-
-        <footer class="comic_footer">
-            <p>created by thamilchselvan kethareswaran | web development | just for fun</p>
-        </footer>
-    </div>
-
+        <button id="vibe-btn" type="button">Make it vibe harder</button>
+    </main>
+    <template id="spark-template">
+        <span class="spark"></span>
+    </template>
     <script src="app.js"></script>
 </body>
 </html>

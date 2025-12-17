@@ -1,1 +1,8 @@
-I Have a Secret The Useless Web is a simple, playful website I built just for fun. It shows comic style cards that reveal random superheroes when you click on them. The idea isn’t to solve any problem it’s just about creativity, animation, and design. Each card has bright colors, bold comic fonts, and funny sound effects that make it feel alive. I made it using only HTML, CSS, and JavaScript, and it even remembers your progress as you explore new heroes.
+# Perma Vibe Portal
+
+Perma Vibe Portal is my Vibe Coding entry for the Useless Web—an interactive, totally impractical mood toy. Tap the floating orb (or hit any key) to remix the palette, animate a new mantra, and spray sparks of neon confetti everywhere. It is intentionally pointless, but it feels like a micro rave made with only HTML, CSS, and vanilla JavaScript.
+
+## How to Run Locally
+1. Clone the repo and open `index.html` in your browser. No build step required.
+2. Click the orb, the "Make it vibe harder" button, or mash the keyboard to cycle randomly generated palettes and particle bursts.
+3. Deploy the `/` root to GitHub Pages (or any static host) to share the useless vibes with the world.
