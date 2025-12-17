@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Firebase Comment Loader</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: #f4f4f4;
+        color: #1f2933;
+      }
+
+      header {
+        background: #1d4ed8;
+        color: white;
+        padding: 1.5rem;
+        text-align: center;
+      }
+
+      main {
+        margin: 2rem auto;
+        max-width: 720px;
+        width: 100%;
+        padding: 0 1rem 3rem;
+      }
+
+      .card {
+        background: white;
+        border-radius: 8px;
+        border: 1px solid #cbd5f5;
+        padding: 1.75rem;
+        box-shadow: 0 15px 30px rgba(15, 23, 42, 0.08);
+      }
+
+      .hint {
+        margin-top: 0;
+        font-size: 0.95rem;
+        color: #475569;
+      }
+
+      button {
+        background: #16a34a;
+        color: white;
+        border: none;
+        padding: 0.75rem 1.25rem;
+        border-radius: 6px;
+        font-size: 1rem;
+        cursor: pointer;
+      }
+
+      button:disabled {
+        opacity: 0.65;
+        cursor: wait;
+      }
+
+      #status {
+        margin-top: 1rem;
+        min-height: 1.5rem;
+        color: #475569;
+      }
+
+      ul {
+        list-style: none;
+        padding-left: 0;
+        margin-top: 1.5rem;
+        display: grid;
+        gap: 1rem;
+      }
+
+      li {
+        border: 1px solid #e2e8f0;
+        border-radius: 6px;
+        padding: 0.85rem 1rem;
+        background: #f8fafc;
+      }
+
+      .comment-name {
+        margin: 0;
+        font-weight: 600;
+      }
+
+      .comment-body {
+        margin: 0.35rem 0 0;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Realtime Database Comments</h1>
+      <p>Small page I built to prove the data is loading from Firebase.</p>
+    </header>
+    <main>
+      <div class="card">
+        <p class="hint">
+          This page talks to the <code>/comments</code> node in my Firebase Realtime
+          Database. Press the button to pull the latest names + text.
+        </p>
+        <button id="loadBtn">Load comments from Firebase</button>
+        <p id="status">Nothing loaded yet.</p>
+        <ul id="commentList"></ul>
+      </div>
+    </main>
+
+    <script type="module">
+      import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js';
+      import {
+        getDatabase,
+        ref,
+        get
+      } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js';
+
+      const firebaseConfig = {
+        apiKey: 'PASTE_API_KEY',
+        authDomain: 'PASTE_PROJECT.firebaseapp.com',
+        databaseURL: 'https://fir-assignment-f190b-default-rtdb.firebaseio.com'
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const db = getDatabase(app);
+
+      const listEl = document.getElementById('commentList');
+      const statusEl = document.getElementById('status');
+      const loadBtn = document.getElementById('loadBtn');
+
+      async function pullComments() {
+        loadBtn.disabled = true;
+        statusEl.textContent = 'Talking to Firebase...';
+        listEl.innerHTML = '';
+
+        try {
+          const snapshot = await get(ref(db, 'comments'));
+
+          if (!snapshot.exists()) {
+            statusEl.textContent = 'No comments saved yet.';
+            return;
+          }
+
+          const comments = snapshot.val();
+          const ids = Object.keys(comments);
+
+          ids.forEach((id) => {
+            const entry = comments[id] || {};
+            const name = entry.name || 'Anonymous';
+            const body = entry.text || entry.comment || '(no text)';
+
+            const li = document.createElement('li');
+            const nameEl = document.createElement('p');
+            nameEl.className = 'comment-name';
+            nameEl.textContent = name;
+
+            const bodyEl = document.createElement('p');
+            bodyEl.className = 'comment-body';
+            bodyEl.textContent = body;
+
+            li.appendChild(nameEl);
+            li.appendChild(bodyEl);
+            listEl.appendChild(li);
+          });
+
+          statusEl.textContent = `Loaded ${ids.length} comment${ids.length === 1 ? '' : 's'}.`;
+        } catch (error) {
+          console.error('Error loading comments:', error);
+          statusEl.textContent = 'Something went wrong. Check the browser console.';
+        } finally {
+          loadBtn.disabled = false;
+        }
+      }
+
+      loadBtn.addEventListener('click', pullComments);
+      pullComments();
+    </script>
+  </body>
+</html>
